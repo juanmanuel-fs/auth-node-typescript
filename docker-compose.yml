@@ -1,0 +1,17 @@
+version: '3.9'
+services:
+  mysql-db:
+    image: mysql
+    container_name: database-api-ts
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    command: 
+      --default-authentication-plugin=mysql_native_password
+      --init-file /docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    restart: always
+    environment:
+      MYSQL_DATABASE: api_ts
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
